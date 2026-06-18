@@ -1,0 +1,422 @@
+/* ==========================================
+   RESET & VARIABLES GENERALES
+   ========================================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+}
+
+:root {
+    --bg-dark: #0a0512;
+    --accent-purple: #6c25be;
+    --accent-cyan: #00f3ff;
+    --text-light: #f5f0fa;
+    --neon-pink: #ff0055;
+}
+
+body {
+    background-color: var(--bg-dark);
+    font-family: 'Courier New', Courier, monospace; /* Tono de máquina de escribir/manifiesto */
+    color: var(--text-light);
+    overflow-x: hidden;
+}
+
+/* Fondo Dinámico con "Orbes" Líquidos */
+.background-universe {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -2;
+    background: radial-gradient(circle at 50% 50%, #15092b, #05020a);
+    overflow: hidden;
+}
+
+.orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+    opacity: 0.4;
+    animation: floatAround 20s infinite alternate ease-in-out;
+}
+
+.orb-1 {
+    width: 400px;
+    height: 400px;
+    background: var(--accent-purple);
+    top: -10%;
+    left: -10%;
+}
+
+.orb-2 {
+    width: 500px;
+    height: 500px;
+    background: var(--accent-cyan);
+    bottom: -10%;
+    right: -10%;
+    animation-delay: -5s;
+}
+
+@keyframes floatAround {
+    0% { transform: translate(0, 0) scale(1); }
+    100% { transform: translate(100px, 50px) scale(1.2); }
+}
+
+/* ==========================================
+   HEADER & NAVBAR
+   ========================================== */
+.navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    padding: 30px 50px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 100;
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.logo {
+    font-size: 1.8rem;
+    font-weight: bold;
+    letter-spacing: 5px;
+    color: #fff;
+    text-shadow: 0 0 10px var(--accent-cyan);
+}
+
+nav a {
+    color: var(--text-light);
+    text-decoration: none;
+    margin-left: 30px;
+    font-size: 0.9rem;
+    letter-spacing: 2px;
+    transition: 0.3s;
+    position: relative;
+}
+
+nav a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 1px;
+    bottom: -5px;
+    left: 0;
+    background-color: var(--neon-pink);
+    transition: 0.4s ease;
+}
+
+nav a:hover::after {
+    width: 100%;
+}
+
+/* ==========================================
+   HERO SECTION (Efecto Glitch & Distorsión)
+   ========================================== */
+.hero {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 20px;
+    position: relative;
+}
+
+.hero-content {
+    max-width: 800px;
+}
+
+/* Efecto de texto distorsionado (Glitch) */
+.glitch-text {
+    font-size: 3.5rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    position: relative;
+    letter-spacing: 3px;
+    color: #fff;
+    animation: floatText 4s infinite ease-in-out;
+}
+
+@keyframes floatText {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); text-shadow: 0 5px 20px var(--accent-purple); }
+}
+
+.subtitle {
+    margin: 30px 0;
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: #bfaecf;
+}
+
+/* Botón CTA Magnético (Estilo Visual) */
+.cta-button {
+    display: inline-block;
+    padding: 15px 40px;
+    color: #fff;
+    text-decoration: none;
+    border: 2px solid var(--accent-cyan);
+    border-radius: 50px;
+    font-weight: bold;
+    letter-spacing: 2px;
+    position: relative;
+    overflow: hidden;
+    transition: 0.5s ease;
+}
+
+.cta-button:hover {
+    background: var(--accent-cyan);
+    color: #000;
+    box-shadow: 0 0 30px var(--accent-cyan);
+    transform: scale(1.05);
+}
+
+/* ==========================================
+   SECCIÓN GALERÍA (Efectos de Cuadros)
+   ========================================== */
+.gallery-section {
+    padding: 100px 50px;
+}
+
+.section-title {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 80px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    background: linear-gradient(to right, #fff, var(--accent-cyan), var(--neon-pink));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 50px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Contenedores de Obras de Arte */
+.art-card {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 10px;
+    overflow: hidden;
+    position: relative;
+    transition: transform 0.5s ease, box-shadow 0.5s ease;
+}
+
+.image-container {
+    width: 100%;
+    height: 450px;
+    position: relative;
+    overflow: hidden;
+}
+
+.image-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: grayscale(40%) contrast(110%);
+    transition: transform 0.8s cubic-bezier(0.165, 0.84, 0.44, 1), filter 0.5s ease;
+}
+
+/* Efectos Surrealistas Individuales en Hover */
+.art-card:hover img {
+    filter: grayscale(0%) contrast(130%);
+    transform: scale(1.1) rotate(1deg);
+}
+
+/* Animaciones de Flotación asíncronas para cada cuadro */
+.card-melt { animation: surrealFloat 6s infinite alternate ease-in-out; }
+.card-float { animation: surrealFloat 8s infinite alternate ease-in-out -2s; }
+.card-distort { animation: surrealFloat 7s infinite alternate ease-in-out -4s; }
+
+@keyframes surrealFloat {
+    0% { transform: translateY(0) rotate(0deg); }
+    100% { transform: translateY(-15px) rotate(-1deg); }
+}
+
+/* Sombreado Neón en el Hover de la tarjeta */
+.art-card:hover {
+    box-shadow: 0 20px 40px rgba(108, 37, 190, 0.3);
+    border-color: var(--accent-purple);
+}
+
+/* Overlay con info del cuadro */
+.card-overlay {
+    position: absolute;
+    bottom: -100%;
+    left: 0;
+    width: 100%;
+    padding: 30px;
+    background: linear-gradient(transparent, rgba(10, 5, 18, 0.95));
+    transition: bottom 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+.art-card:hover .card-overlay {
+    bottom: 0;
+}
+
+.card-overlay h3 {
+    font-size: 1.3rem;
+    margin-bottom: 5px;
+    color: var(--accent-cyan);
+}
+
+/* ==========================================
+   MANIFIESTO
+   ========================================== */
+.manifesto-section {
+    padding: 120px 20px;
+    display: flex;
+    justify-content: center;
+}
+
+.manifesto-box {
+    max-width: 700px;
+    text-align: center;
+    border: 1px dashed rgba(255, 255, 255, 0.2);
+    padding: 50px;
+    background: rgba(255, 255, 255, 0.01);
+    position: relative;
+}
+
+.manifesto-box h2 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+    color: var(--neon-pink);
+}
+
+.manifesto-box p {
+    font-style: italic;
+    font-size: 1.2rem;
+    line-height: 2;
+}
+
+/* ==========================================
+   BOTÓN WHATSAPP DE IMPACTO (CSS Puro)
+   ========================================== */
+.whatsapp-btn {
+    position: fixed;
+    bottom: 40px;
+    right: 40px;
+    background: #25D366;
+    color: white;
+    width: 60px;
+    height: 60px;
+    border-radius: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 30px;
+    text-decoration: none;
+    z-index: 999;
+    box-shadow: 0 0 20px rgba(37, 211, 102, 0.5);
+    transition: width 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+
+/* Efecto de pulso expansivo surrealista */
+.whatsapp-btn::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: #25D366;
+    border-radius: 50%;
+    z-index: -1;
+    animation: pulseSurreal 2s infinite;
+}
+
+@keyframes pulseSurreal {
+    0% { transform: scale(1); opacity: 0.8; }
+    100% { transform: scale(1.6); opacity: 0; }
+}
+
+/* Expansión del texto al pasar el mouse */
+.btn-text {
+    font-size: 0px;
+    white-space: nowrap;
+    transition: 0.4s;
+    font-family: sans-serif;
+    font-weight: bold;
+}
+
+.whatsapp-btn:hover {
+    width: 240px;
+    padding: 0 20px;
+    justify-content: space-between;
+}
+
+.whatsapp-btn:hover .btn-text {
+    font-size: 16px;
+    margin-left: 10px;
+}
+
+/* ==========================================
+   FOOTER & RESPONSIVE
+   ========================================== */
+footer {
+    text-align: center;
+    padding: 40px;
+    font-size: 0.8rem;
+    color: #443b5c;
+    border-top: 1px solid rgba(255, 255, 255, 0.02);
+}
+
+/* ==========================================
+   MODIFICACIONES PARA PANTALLAS MÓVILES
+   ========================================== */
+@media(max-width: 768px) {
+    /* Cambiamos la barra de navegación a una columna para apilar los elementos */
+    .navbar { 
+        padding: 20px; 
+        flex-direction: column;
+        gap: 15px; /* Espacio entre el logo y los enlaces */
+        text-align: center;
+    }
+
+    /* Centramos el logo */
+    .logo { 
+        font-size: 2rem;
+        margin: 0 auto;
+    }
+
+    /* Quitamos el margen izquierdo que tenían los enlaces y los centramos */
+    nav {
+        display: flex;
+        justify-content: center;
+        gap: 20px; /* Espacio entre un enlace y otro */
+        width: 100%;
+    }
+
+    nav a {
+        margin-left: 0; /* Eliminamos el margen del código original */
+        font-size: 0.85rem;
+    }
+
+    /* Ajustes visuales para el título principal en móviles */
+    .glitch-text { 
+        font-size: 2.2rem; 
+    }
+
+    /* Ajustes para la galería en móviles */
+    .gallery-section { 
+        padding: 50px 20px; 
+    }
+
+    /* En móviles mantenemos el botón de WhatsApp circular para que no tape la pantalla */
+    .whatsapp-btn:hover { 
+        width: 60px; 
+    } 
+    
+    .whatsapp-btn:hover .btn-text { 
+        display: none; 
+    }
+}
